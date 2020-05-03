@@ -1,8 +1,9 @@
 from flask import render_template, request, redirect, url_for, abort
 from . import main
-from .forms import CommentForm
-from ..models import Comment
+from .forms import CommentForm, UpdateProfile, PitchForm
+from ..models import Comment, User
 from flask_login import login_required
+from .. import db, photos
 
 
 @main.route('/')
