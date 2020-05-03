@@ -1,0 +1,28 @@
+.container-fluid{
+    background-image: url(https://besthqwallpapers.com/img/original/8799/light-bulb-idea-light-idea-concepts.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+body{
+    background-color:black;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+.container{
+    background-color: black;
+}
+.navbar{
+    background-color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+.homefont{
+    font-family: 'Amatic SC', cursive;
+    font-size: 900%;
+}
+
+.title{
+    font-family: 'Suranna', serif;
+}
+.homesub{
+    text-decoration: underline;
+}

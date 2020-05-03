@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+
+{% block styles%}
+    {{ super() }}
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat&family=Suranna&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="text-left">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 class="homefont">Elevator pitch</h1>
+
+        <h2 class="title homesub"><em>~ The Art of Pitchcraft ~</em></h2>
+
+        <h4>You have <STRONG>ONE</STRONG> minute to say it all.<br> Whether it's a pickup line, an innovative idea, a tech pitch,<br> a product pitch, or a joke.</h4>
+        <h4>So let's get pitchin'!</h4>
+
+    </div> <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    
+    
+</div>
+
+{% endblock%}
