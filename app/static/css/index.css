@@ -26,3 +26,10 @@ body{
 .homesub{
     text-decoration: underline;
 }
+.homea{
+    color: rgb(104, 4, 24);
+}
+.homea:hover{
+    color: white;
+    text-decoration: underline;
+}

@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, abort
 from . import main
 from .forms import CommentForm, UpdateProfile, PitchForm
 from ..models import Comment, User
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .. import db, photos
 
 
@@ -86,31 +86,31 @@ def pitches(category):
 
     return render_template("pitches.html", pitches = pitches, category = category)
 
-@main.route('/reviews/<pitch_id>')
+@main.route('/comments/<pitch_id>')
 @login_required
-def reviews(pitch_id):
+def comments(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
-    reviews = Review.query.filter_by(pitch_id = pitch.id).order_by(Review.posted.desc())
+    comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(comment.posted.desc())
 
-    return render_template('reviews.html', pitch = pitch, reviews = reviews)
+    return render_template('comments.html', pitch = pitch, comments = comments)
 
-@main.route('/reviews/<pitch_id>/like')
+@main.route('/comments/<pitch_id>/like')
 @login_required
 def like(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
-    reviews = Review.query.filter_by(pitch_id = pitch.id).order_by(Review.posted.desc())
+    comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(comment.posted.desc())
     like = pitch.like()
 
-    return render_template('reviews.html', pitch = pitch, reviews = reviews, like = like)
+    return render_template('comments.html', pitch = pitch, comments = comments, like = like)
 
-@main.route('/reviews/<pitch_id>/dislike')
+@main.route('/comments/<pitch_id>/dislike')
 @login_required
 def dislike(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
-    reviews = Review.query.filter_by(pitch_id = pitch.id).order_by(Review.posted.desc())
+    comments = comment.query.filter_by(pitch_id = pitch.id).order_by(comment.posted.desc())
     dislike = pitch.dislike()
 
-    return render_template('reviews.html', pitch = pitch, reviews = reviews, dislike =dislike)
+    return render_template('comments.html', pitch = pitch, comments = comments, dislike =dislike)
 
 
 

@@ -1,0 +1,4 @@
+
+Hello {{user.username}}
+Welcome to the Elevator Pitch Community.
+We're glad that you've signed up for our application and want to welcome you to the family. Please enjoy reading pitches of all other users, leave comments, read other people's comments and present your own pitches which can be commented and voted upon.

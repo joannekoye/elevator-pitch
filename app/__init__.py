@@ -7,6 +7,7 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 from flask_mail import Mail
+from flask_simplemde import SimpleMDE
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -16,6 +17,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 photos = UploadSet('photos',IMAGES)
 mail = Mail()
+simple = SimpleMDE()
 
 def create_app(config_name):
 
@@ -29,6 +31,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    simple.init_app(app)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
