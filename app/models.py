@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
     pitches = db.relationship("Pitch", backref= "user", lazy="dynamic")
-    reviews = db.relationship("Review", backref = "user", lazy = "dynamic")
+    commentss = db.relationship("Comment", backref = "user", lazy = "dynamic")
 
 
     @property
@@ -54,7 +54,7 @@ class Pitch(db.Model):
     dislikes = db.Column(db.Integer)
     vote_count = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    Reviews = db.relationship("Review", backref = "pitch", lazy = "dynamic")
+    Comment = db.relationship("Comment", backref = "pitch", lazy = "dynamic")
     pitch_statement = db.Column(db.String())
 
     def like(self):
@@ -73,10 +73,10 @@ class Pitch(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def get_pitch_reviews(self):
+    def get_pitch_comments(self):
         pitch = Pitch.query.filter_by(id = self.id).first()
-        reviews = Review.query.filter_by(pitch_id = pitch.id).order_by(Review.posted.desc())
-        return reviews
+        comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(Comment.posted.desc())
+        return comments
 
 
 
@@ -92,7 +92,7 @@ class Comment(db.Model):
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-    def save_review(self):
+    def save_comment(self):
         db.session.add(self)
         db.session.commit()
 

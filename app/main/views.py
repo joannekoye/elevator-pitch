@@ -1,9 +1,11 @@
 from flask import render_template, request, redirect, url_for, abort
-from app import app
-from .models import Comment
+from . import main
 from .forms import CommentForm
+from ..models import Comment
+from flask_login import login_required
 
-@app.route('/')
+
+@main.route('/')
 def index():
     '''
     returns index and data
@@ -12,7 +14,7 @@ def index():
     return render_template('index.html', title = title)
 
 
-@app.route('/user/<uname>')
+@main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
     pitches = Pitch.query.filter_by(user_id = user.id).order_by(Pitch.posted.desc())
@@ -22,7 +24,7 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user, pitches = pitches)
 
-@app.route('/user/<uname>/update',methods = ['GET','POST'])
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -41,7 +43,7 @@ def update_profile(uname):
 
     return render_template('profile/update.html',form =form,user=user)
 
-@app.route('/user/<uname>/update/pic',methods= ['POST'])
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
@@ -50,9 +52,9 @@ def update_pic(uname):
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('app.profile',uname=uname))
+    return redirect(url_for('main.profile',uname=uname))
 
-@app.route('/user/<uname>/pitch',methods= ['GET','POST'])
+@main.route('/user/<uname>/pitch',methods= ['GET','POST'])
 @login_required
 def new_pitch(uname):
     user = User.query.filter_by(username = uname).first()
@@ -77,13 +79,13 @@ def new_pitch(uname):
 
     return render_template('new_pitch.html',uname=uname, user = user, PitchForm = form)
 
-@app.route('/pitches/<category>')
+@main.route('/pitches/<category>')
 def pitches(category):
     pitches = Pitch.query.filter_by(category = category).order_by(Pitch.posted.desc())
 
     return render_template("pitches.html", pitches = pitches, category = category)
 
-@app.route('/reviews/<pitch_id>')
+@main.route('/reviews/<pitch_id>')
 @login_required
 def reviews(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
@@ -91,7 +93,7 @@ def reviews(pitch_id):
 
     return render_template('reviews.html', pitch = pitch, reviews = reviews)
 
-@app.route('/reviews/<pitch_id>/like')
+@main.route('/reviews/<pitch_id>/like')
 @login_required
 def like(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
@@ -100,7 +102,7 @@ def like(pitch_id):
 
     return render_template('reviews.html', pitch = pitch, reviews = reviews, like = like)
 
-@app.route('/reviews/<pitch_id>/dislike')
+@main.route('/reviews/<pitch_id>/dislike')
 @login_required
 def dislike(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
@@ -111,7 +113,7 @@ def dislike(pitch_id):
 
 
 
-@app.route('/pitch/comment/new/<pitch_id>', methods = ['GET', 'POST'])
+@main.route('/pitch/comment/new/<pitch_id>', methods = ['GET', 'POST'])
 @login_required
 def new_comment(pitch_id):
     form = CommentForm()
