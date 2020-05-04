@@ -17,7 +17,7 @@ body{
 }
 .homefont{
     font-family: 'Amatic SC', cursive;
-    font-size: 900%;
+    font-size: 1000%;
 }
 
 .title{
@@ -32,4 +32,20 @@ body{
 .homea:hover{
     color: white;
     text-decoration: underline;
+}
+.dropdown-item{
+    color: rgb(104, 4, 24);
+
+}
+.dropdown-item:hover{
+    color: rgb(20, 20, 83);
+    text-decoration: none;
+}
+.dropdown-menu{
+    width: max-content;
+    height: max-content;
+    padding: 15px;
+}
+.username {
+    color: rgb(216, 6, 48);
 }

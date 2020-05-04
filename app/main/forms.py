@@ -8,7 +8,7 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class PitchForm(FlaskForm):
-    category = SelectField('Category', choices=[('', ''), ('pickup lines', 'Pickup Lines'), ('technology', 'Technology Pitches'), ('product', 'Product Pitches'), ('innovative', 'Innovative Pitches'), ('joke', 'Jokes')], validators = [Required()])
+    category = SelectField('Category', choices=[('', ''), ('pickup lines', 'Pickup Lines'), ('technology', 'Technology Pitches'), ('product', 'Product Pitches'), ('innovative', 'Innovative Pitches'), ('jokes', 'Jokes')], validators = [Required()])
     title = StringField('Pitch title', validators = [Required()])
     pitch = TextAreaField('Pitch', validators = [Required()])
     submit = SubmitField('Submit')

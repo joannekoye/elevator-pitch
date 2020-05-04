@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse" role="navigation">
+<nav class="navbar navbar-inverse " role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -9,16 +9,34 @@
             </button>
             <a class="navbar-brand" href="/"> Elevator pitch </a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="navbarNavDropdown">
             <ul class="nav navbar-nav">
-                <li><a href="{{url_for('auth.login')}}">Get pitchin'</a></li>
                 {% if current_user.is_authenticated %}
-                  <li style="color:white;padding:15px;"><a href="{{url_for('main.profile',uname=current_user.username)}}">{{current_user.username}}'s profile</a></li>
+                  <li><a href="{{url_for('main.profile',uname=current_user.username)}}">{{current_user.username}}'s profile</a></li>
                   <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href='#' id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Get pitchin'
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <ul>
+                        <li><a class="dropdown-item text-left" href="{{url_for('main.pitches',category='pickup lines')}}">PickUp Lines</a></li>
+                        <br>
+                        <li><a class="dropdown-item text-left" href="{{url_for('main.pitches',category='product')}}">Product Pitches</a></li>
+                        <br>
+                        <li><a class="dropdown-item text-left" href="{{url_for('main.pitches',category='jokes')}}">Jokes</a></li>
+                        <br>
+                        <li><a class="dropdown-item text-left" href="{{url_for('main.pitches',category='innovative')}}">Innovative Ideas</a></li>
+                        <br>
+                        <li><a class="dropdown-item text-left" href="{{url_for('main.pitches',category='technology')}}">Tech Pitches</a></li>
+                      </ul>
+                    </div>
+                  </li>
                 {% else %}
                   <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
                 {%endif%}
+            </ul>
         </div>
-
     </div>
-</div>
+</nav>
+ 

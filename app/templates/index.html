@@ -20,20 +20,21 @@
         <br>
         <h1 class="homefont">Elevator pitch</h1>
 
-        <h2 class="title homesub"><em>~ The Art of Pitchcraft ~</em></h2>
+        <h3 class="title homesub"><em>~ The Art of Pitchcraft ~</em></h3>
 
         <h4>You have <STRONG>ONE</STRONG> minute to say it all.<br> Whether it's a pickup line, an innovative idea, a tech pitch,<br> a product pitch, or a joke.</h4>
-        <a class="homea" href="{{url_for('auth.login')}}"><h4>So let's get pitchin'!</h4></a>
-
-    </div> <br>
+        {% if current_user.is_authenticated %}
+        <br>
+        {% else %}
+        <a class="homea" href="{{url_for('auth.login')}}"><h4>So Sign in and let's get pitchin'!</h4></a>
+        {%  endif   %}
+    </div> 
     <br>
     <br>
     <br>
     <br>
     <br>
-    
-    
-    
+    <br>
 </div>
 
 {% endblock%}
