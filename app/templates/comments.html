@@ -29,7 +29,7 @@
     {% for comment in comments %}
       <div class="row">
         <div class="col-md-4 text-center ul">
-          <h4><strong>{{comment.pitch_comment_title}}</strong></h4>
+          <h4><strong>{{comment.pitch_comment_title | upper}}      :</strong></h4>
         </div>
         <div class="col-md-4 text-center">
           <h5>{{comment.pitch_comment}}</h5>
