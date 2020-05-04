@@ -34,7 +34,7 @@ body{
     text-decoration: underline;
 }
 .dropdown-item{
-    color: rgb(104, 4, 24);
+    color: rgb(216, 6, 48);
 
 }
 .dropdown-item:hover{
@@ -48,4 +48,19 @@ body{
 }
 .username {
     color: rgb(216, 6, 48);
+}
+.ul{
+    text-decoration: underline;
+}
+.black{
+    color: #000;
+}
+.black:hover{
+    text-decoration: underline;
+}
+.card {
+    width: max-content;
+    height: max-content;
+    border-width: 2px;
+    border-color: white;
 }

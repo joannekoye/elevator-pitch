@@ -8,12 +8,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="col-md-2"></div>
+<div class="container col-md-6">
   {{wtf.quick_form(form)}}
-
+  <br>
+  <br>
+  <p>Upload your profile photo</p>
   <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
     <input type="file"  name="photo" class="form-control" required>
-    <input type="submit">
+    <br>
+    <input type="submit" class="btn btn-light black">
   </form>
 </div>
 {% endblock %}

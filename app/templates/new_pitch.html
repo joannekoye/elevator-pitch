@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block styles%}
+    {{ super() }}
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat&family=Suranna&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center username"> @{{user.username}} </h3>
+    <br>
+    <div class="row">
+      <!--Display profile photo-->
+      <div class="col-md-6 text-center">
+        {% if user.profile_pic_path %}
+        <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" width="300" height="300">
+        {%else%}
+        <p>@{{user.username}} has no profile picture</p>
+        {% endif %}
+        <br>
+      </div>
+  
+      <div class="col-md-6 text-center">
+        <!--Displaying user bio-->
+        {% if user.bio %}
+          <h4 class="ul">Bio.</h4>
+          <p> {{user.bio}}</p>
+        {%else%}
+          <p> @{{user.username}} has no bio </p>
+        {% endif %}
+        <br>
+      </div> 
+    </div>
+    <br>
+    <div class="row">
+      <div class="text-center">
+        {% if user == current_user %}
+        <br>
+        <a href="{{url_for('main.update_profile',uname=user.username)}}"> <button type="button" name="button" class="btn btn-light"> Edit Profile </button></a>
+        <br>
+        {% endif %}
+        <br>
+      </div>
+    </div>
+    <div class="row text-center">
+        {% import "bootstrap/wtf.html" as wtf %}
+        <h3 class="ul">New Pitch</h3>
+        <br>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">{{wtf.quick_form(PitchForm)}}</div>
+        <div class="col-md-3"></div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <br>
+</div>
+{% endblock %}

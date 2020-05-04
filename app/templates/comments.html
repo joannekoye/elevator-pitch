@@ -1,58 +1,53 @@
 {% extends 'base.html'%}
 
+{% block styles%}
+    {{ super() }}
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat&family=Suranna&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
 
 {% block content %}
 <div class="container">
-  <div class="col-md-12" style="text-align: center">
-      <h3>{{pitch.title | upper}}</h3>
-      <p>Posted by <strong>{{pitch.user.username}}</strong></p>
-      <p>Date: <strong>{{pitch.posted}}</strong></p>
-      <p>"{{pitch.pitch_statement}}"</p>
-      <p>Category: <strong>{{pitch.category | upper}}</strong></p>
-      <p>Likes: <strong>{{pitch.likes}}</strong></p>
-      <p>Dislikes: <strong>{{pitch.dislikes}}</strong></p>
-      <p>Total Votes: <strong>{{pitch.vote_count}}</strong></p>
-      <a href="{{url_for('main.like',pitch_id = pitch.id)}}"><button type="button" name="button" class="btn btn-warning">Like</button></a>
-      <a href="{{url_for('main.dislike',pitch_id = pitch.id)}}"><button type="button" name="button" class="btn btn-warning">Dislike</button></a>
-      <hr>
+  <div class="col-md-12 text-center">
+    <h4><strong>{{pitch.title | upper}}</strong></h4>
+    <br>
+    <p>"{{pitch.pitch_statement}}"</p>
+    <br>
+    <p>Category: {{pitch.category | upper}}</p>
+    <p>Posted by: <strong>{{pitch.user.username}}</strong></p>
+    <h6>Date: {{pitch.posted.strftime('%Y-%m-%d')}}</h6>
+    <p>Likes: <strong>{{pitch.likes}}</strong></p>
+    <p>Dislikes: <strong>{{pitch.dislikes}}</strong></p>
+    <p>Total Votes: <strong>{{pitch.vote_count}}</strong></p>
+    <a href="{{url_for('main.like',pitch_id = pitch.id)}}"><button type="button" name="button" class="btn btn-success">Like</button></a>
+    <a href="{{url_for('main.dislike',pitch_id = pitch.id)}}"><button type="button" name="button" class="btn btn-secondary">Dislike</button></a>
+    <hr>
   </div>
-        <h1 class="title">Comments</h1>
-        <hr>
-
-        {% if comments %}
-        <div class="row">
-            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3">
-              <h2 class="title1">comment Title</h2>
-            </div>
-            <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-              <h2 class="title1">comment Message:</h2>
-            </div>
-            <div class="col-xs-10 col-sm-10 col-md-3 col-lg-3">
-              <h2 class="title1">comment By:</h2>
-            </div>
-          </div>
-          {% for comment in comments %}
-      
-          <div class="row">
-      
-            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3">
-              <h4>{{comment.pitch_comment_title}}</h4>
-            </div>
-            <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-              <h4> <a>{{comment.pitch_comment}}</a> </h4>
-            </div>
-            <div class="col-xs-10 col-sm-10 col-md-3 col-lg-3">
-              <h4>{{comment.user.username}}</h4>
-            </div>
-            <br><br>
-          </div>
-          {% endfor %}
-            <a class="btn btn-warning btn-lg text-center" href="/pitch/comment/new/{{pitch.id}}"> Make a new comment</a>
-        {% else%}
-            <h3 class="text-center">This pitch has no comments </h3>
-
-            <a class="btn btn-warning btn-lg text-center" href="/pitch/comment/new/{{pitch.id}}"> Write a new comment</a>
-        {% endif %}
-
+  <h1 class="title">Comments</h1>
+  <hr>
+  {% if comments %}
+    {% for comment in comments %}
+      <div class="row">
+        <div class="col-md-4 text-center ul">
+          <h4><strong>{{comment.pitch_comment_title}}</strong></h4>
+        </div>
+        <div class="col-md-4 text-center">
+          <h5>{{comment.pitch_comment}}</h5>
+        </div>
+        <div class="col-md-4 text-left">
+          <h5>By: @{{comment.user.username}}</h5>
+        </div>
+        <br><br>
+      </div>
+    {% endfor %}
+    <div class="row">
+      <div class="text-center">
+        <a class="btn btn-danger" href="/pitch/comment/new/{{pitch.id}}"> Make a new comment</a>
+      </div>
+    </div>
+  {% else%}
+    <h3 class="text-center">This pitch has no comments </h3>
+    <a class="btn btn-danger" href="/pitch/comment/new/{{pitch.id}}"> Make a new comment</a>
+  {% endif %}
 </div>
 {% endblock %}

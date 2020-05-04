@@ -1,31 +1,42 @@
 {% extends 'base.html' %}
 
+{% block styles%}
+    {{ super() }}
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat&family=Suranna&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <div class="">
-      <h3 class="text-center">Pitches</h3>
-      {% if pitches %}
-      {% for row in pitches | batch(2) %}
+    <h3 class="text-center ul">{{category | upper}}</h3>
+    <br>
+    {% if pitches %}
       <div class="row ">
-          {% for pitch in row %}
-          <div class="col-md-5 card white" style="text-align:center">
-              <h3 class="text-center">{{pitch.title | upper}}</h3>
-              <p>Posted by <strong>{{pitch.user.username}}</strong></p>
-              <p>Date: <strong>{{pitch.posted}}</strong></p>
+      {% for row in pitches | batch(2) %}
+        {% for pitch in row %}
+          <div class="col-md-6 text-center card">
+            <h4><strong>{{pitch.title | upper}}</strong></h4>
+            <br>
+            <div>
               <p>"{{pitch.pitch_statement}}"</p>
-              <p>Category: <strong>{{pitch.category | upper}}</strong></p>
+              <br>
+              <p>Category: {{pitch.category | upper}}</p>
+              <p>Posted by: <strong>{{pitch.user.username}}</strong></p>
+              <h6>Date: {{pitch.posted.strftime('%Y-%m-%d')}}</h6>
               <div>
-                  {% if current_user.is_authenticated %}
-                  <a href="{{url_for('main.reviews',pitch_id = pitch.id)}}"> <button type="button" name="button" class="btn btn-warning">View Reviews and Votes</button> </a>
-                  {% endif %}
-              </div>
+                {% if current_user.is_authenticated %}
+                <a class="pitch-comment" href="{{url_for('main.comments',pitch_id = pitch.id)}}"> <button type="button" name="button" class="btn btn-danger">View Reviews and Votes</button></a>
+                {% endif %}
+            </div>
+            </div>
           </div>
-          {% endfor %}
-      </div>
+        {% endfor %}
       {% endfor %}
-      {% else %}
-      <h2>There are no pitches</h2>
-      {% endif %}
+      </div>
+    {% else %}
+      <h2>You have no pitches</h2>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

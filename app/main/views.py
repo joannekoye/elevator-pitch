@@ -90,7 +90,7 @@ def pitches(category):
 @login_required
 def comments(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
-    comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(comment.posted.desc())
+    comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(Comment.posted.desc())
 
     return render_template('comments.html', pitch = pitch, comments = comments)
 
@@ -98,7 +98,7 @@ def comments(pitch_id):
 @login_required
 def like(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
-    comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(comment.posted.desc())
+    comments = Comment.query.filter_by(pitch_id = pitch.id).order_by(Comment.posted.desc())
     like = pitch.like()
 
     return render_template('comments.html', pitch = pitch, comments = comments, like = like)
@@ -107,7 +107,7 @@ def like(pitch_id):
 @login_required
 def dislike(pitch_id):
     pitch = Pitch.query.filter_by(id = pitch_id).first()
-    comments = comment.query.filter_by(pitch_id = pitch.id).order_by(comment.posted.desc())
+    comments = comment.query.filter_by(pitch_id = pitch.id).order_by(Comment.posted.desc())
     dislike = pitch.dislike()
 
     return render_template('comments.html', pitch = pitch, comments = comments, dislike =dislike)
@@ -130,6 +130,6 @@ def new_comment(pitch_id):
         db.session.add(comment)
         db.session.commit()
 
-        return redirect(url_for('comments', pitch_id=pitch.id ))
+        return redirect(url_for('.comments', pitch_id=pitch.id ))
 
     return render_template('new_comment.html', comment_form = form)

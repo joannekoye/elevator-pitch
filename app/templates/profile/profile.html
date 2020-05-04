@@ -16,7 +16,7 @@
     <!--Display profile photo-->
     <div class="col-md-6 text-center">
       {% if user.profile_pic_path %}
-      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" width="300" height="300">
       {%else%}
       <p>@{{user.username}} has no profile picture</p>
       {% endif %}
@@ -26,6 +26,7 @@
     <div class="col-md-6 text-center">
       <!--Displaying user bio-->
       {% if user.bio %}
+        <h4 class="ul">Bio.</h4>
         <p> {{user.bio}}</p>
       {%else%}
         <p> @{{user.username}} has no bio </p>
@@ -46,20 +47,23 @@
   </div>
   <br>
   <div class="row">
-    <h3 class="text-center">My Pitches</h3>
+    <h3 class="text-center ul">My Pitches</h3>
+    <br>
       <div class="col-md-2"></div>
         <div class="col-md-8">
           {% if pitches %}
             <div class="row ">
             {% for row in pitches | batch(2) %}
               {% for pitch in row %}
-                <div class="col-md-6">
-                  <h3 class="text-center"><strong>{{pitch.title | upper}}</strong></h3>
+                <div class="col-md-6 text-center card">
+                  <h4><strong>{{pitch.title | upper}}</strong></h4>
+                  <br>
                     <div>
+                      <p>"{{pitch.pitch_statement}}"</p>
+                      <br>
                       <p>Category: {{pitch.category | upper}}</p>
                       <p>Posted by: <strong>{{pitch.user.username}}</strong></p>
-                      <h6>Date: {{pitch.posted}}</h6>
-                      <p>"{{pitch.pitch_statement}}"</p>
+                      <h6>Date: {{pitch.posted.strftime('%Y-%m-%d')}}</h6>
                     </div>
                 </div>
               {% endfor %}
@@ -75,5 +79,7 @@
     <br>
       <a href="{{url_for('main.new_pitch',uname=user.username)}}"> <button type="button" name="button" class="btn btn-danger"> Add a New Pitch </button></a>
   </div>
+  <br>
+  <br>
 </div>
 {% endblock %}
