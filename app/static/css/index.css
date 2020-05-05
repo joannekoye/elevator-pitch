@@ -46,9 +46,6 @@ body{
     height: max-content;
     padding: 15px;
 }
-.username {
-    color: rgb(216, 6, 48);
-}
 .ul{
     text-decoration: underline;
 }

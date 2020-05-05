@@ -10,7 +10,7 @@
 {% block content %}
 <div class="container">
   <!-- displaying  Username-->
-  <h3 class="text-center username"> @{{user.username}} </h3>
+  <h3 class="text-center"> @{{user.username}} </h3>
   <br>
   <div class="row">
     <!--Display profile photo-->
@@ -75,7 +75,10 @@
         </div>
         <div class="col-md-2"></div>
   </div>
-  
+  <div class="row text-center">
+    <br>
+      <a href="{{url_for('main.new_pitch',uname=user.username)}}"> <button type="button" name="button" class="btn btn-danger"> Add a New Pitch </button></a>
+  </div>
   <br>
   <br>
 </div>
